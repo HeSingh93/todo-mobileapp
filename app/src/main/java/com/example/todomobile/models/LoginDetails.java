@@ -12,6 +12,14 @@ public class LoginDetails {
         this.employeeId = employeeId;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }

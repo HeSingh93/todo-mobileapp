@@ -16,6 +16,7 @@ public class WorkOrder implements Parcelable {
     private String workDescription;
     private String contactInfo;
     private Customer customer;
+    private Employee employee;
     private int status;
     private String timeStarted;
     private String timeFinished;
@@ -24,13 +25,14 @@ public class WorkOrder implements Parcelable {
     private List<Expense> expenses;
 
     public WorkOrder(int id, String dateTimeInfo, String address, String workDescription, String contactInfo,
-                     Customer customer, int status) {
+                     Customer customer, Employee employee, int status) {
         this.id = id;
         this.dateTimeInfo = dateTimeInfo;
         this.address = address;
         this.workDescription = workDescription;
         this.contactInfo = contactInfo;
         this.customer = customer;
+        this.employee = employee;
         this.status = status;
         this.timeStarted = "";
         this.timeFinished = "";
@@ -46,6 +48,7 @@ public class WorkOrder implements Parcelable {
         workDescription = in.readString();
         contactInfo = in.readString();
         customer = in.readParcelable(Customer.class.getClassLoader());
+        employee = in.readParcelable(Employee.class.getClassLoader());
         status = in.readInt();
         timeStarted = in.readString();
         timeFinished = in.readString();
@@ -62,6 +65,7 @@ public class WorkOrder implements Parcelable {
         dest.writeString(workDescription);
         dest.writeString(contactInfo);
         dest.writeParcelable(customer, flags);
+        dest.writeParcelable(employee, flags);
         dest.writeInt(status);
         dest.writeString(timeStarted);
         dest.writeString(timeFinished);
@@ -109,6 +113,10 @@ public class WorkOrder implements Parcelable {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 
     public int getStatus() {
