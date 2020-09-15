@@ -62,18 +62,6 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/txtCreateAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:clickable="true"
-            android:linksClickable="true"
-            android:text="Create account"
-            android:textColor="#FBFBFB"
-            android:textSize="17sp"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
