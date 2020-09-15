@@ -115,24 +115,48 @@ public class WorkOrder implements Parcelable {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public String getTimeStarted() {
         return timeStarted;
+    }
+
+    public void setTimeStarted(String timeStarted) {
+        this.timeStarted = timeStarted;
     }
 
     public String getTimeFinished() {
         return timeFinished;
     }
 
+    public void setTimeFinished(String timeFinished) {
+        this.timeFinished = timeFinished;
+    }
+
     public double getTravelHours() {
         return travelHours;
+    }
+
+    public void setTravelHours(double travelHours) {
+        this.travelHours = travelHours;
     }
 
     public String getComment() {
         return comment;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public List<Expense> getExpenses() {
         return expenses;
+    }
+
+    public void addExpense(Expense expense) {
+        expenses.add(expense);
     }
 
     @NonNull
