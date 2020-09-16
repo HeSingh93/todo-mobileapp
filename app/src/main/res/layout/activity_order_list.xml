@@ -17,15 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <ImageView
-            android:id="@+id/imageview2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="#2783A8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ListView
             android:id="@+id/listviewID"
             android:layout_width="390dp"

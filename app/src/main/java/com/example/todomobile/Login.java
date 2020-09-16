@@ -87,34 +87,90 @@ public class Login extends AppCompatActivity {
         Employee employee1 = new Employee(1, "Henrik", "Henriksson", "070-111111");
         Employee employee2 = new Employee(2, "Anna", "Andersson", "073-777777");
         Employee employee3 = new Employee(3, "Gustav", "Gustavsson", "070-123456");
+        Employee employee4 = new Employee(4, "Sofia", "Larsson", "070-3456750");
+        Employee employee5 = new Employee(4, "Andreas", "Lindsten", "070-8856450");
+        Employee employee6 = new Employee(4, "Mikael", "Ludvigsson", "070-7398633");
+        Employee employee7 = new Employee(4, "David", "Andersson", "070-9045553");
+        Employee employee8 = new Employee(4, "Bo", "Adaktusson", "070-1232178");
+        Employee employee9 = new Employee(4, "Isabell", "Löv", "076-9976345");
+        Employee employee10 = new Employee(4, "Emelie", "Johanson", "070-7503487");
 
         employees.add(employee1);
         employees.add(employee2);
         employees.add(employee3);
+        employees.add(employee4);
+        employees.add(employee5);
+        employees.add(employee6);
+        employees.add(employee7);
+        employees.add(employee8);
+        employees.add(employee9);
+        employees.add(employee10);
 
         LoginDetails loginDetails1 = new LoginDetails("Henrik", "lösenord", 1);
         LoginDetails loginDetails2 = new LoginDetails("Anna", "hejhej", 2);
         LoginDetails loginDetails3 = new LoginDetails("Gustav", "password", 3);
+        LoginDetails loginDetails4 = new LoginDetails("Sofia", "äpple", 3);
+        LoginDetails loginDetails5 = new LoginDetails("Andreas", "Cykelsadel", 3);
+        LoginDetails loginDetails6 = new LoginDetails("Mikael", "skogen", 3);
+        LoginDetails loginDetails7 = new LoginDetails("David", "barnen", 3);
+        LoginDetails loginDetails8 = new LoginDetails("Bo", "jobbet", 3);
+        LoginDetails loginDetails9 = new LoginDetails("Isabell", "skolan", 3);
+        LoginDetails loginDetails10 = new LoginDetails("Emelie", "granskog", 3);
 
         loginDetails.add(loginDetails1);
         loginDetails.add(loginDetails2);
         loginDetails.add(loginDetails3);
+        loginDetails.add(loginDetails4);
+        loginDetails.add(loginDetails5);
+        loginDetails.add(loginDetails6);
+        loginDetails.add(loginDetails7);
+        loginDetails.add(loginDetails8);
+        loginDetails.add(loginDetails9);
+        loginDetails.add(loginDetails10);
 
-        Customer customer1 = new Customer(1, "Volvo", "Bilgatan 2", "Håkan Samuelsson", "031-555555");
-        Customer customer2 = new Customer(2, "AstraZeneca", "Medicingatan 4", "Astrid Zeneca", "070-234567");
+        Customer customer1 = new Customer(1, "Volvo", "Bilgatan 2, Göteborg", "Håkan Samuelsson", "031-555555");
+        Customer customer2 = new Customer(2, "AstraZeneca", "Medicingatan 4, Göteborg", "Astrid Zeneca", "070-234567");
+        Customer customer3 = new Customer(3, "Newton", "Magasingatan 5, Göteborg", "Håkan Sigvardsson", "070-2234534");
+        Customer customer4 = new Customer(4, "Åhlens", "Hamngatan 43, Stockholm", "Linnea Hurtig", "070-3456755");
+        Customer customer5 = new Customer(5, "Skanska", "Fabriksvägen 1, Borlänge", "Anders Bernardsson", "070-9982834");
+        Customer customer6 = new Customer(6, "Håkans bilar", "Skogsstigen 11, Askim", "Håkan Andersson", "070-2827363");
+        Customer customer7 = new Customer(7, "Sony Eriksson", "Gustav Adolfs Torg 4, Malmö", "Sofia Bertilsson", "070-8694553");
+        Customer customer8 = new Customer(8, "HSB huvudkontor", "Trägatan 48, Göteborg", "Rolf Radius", "070-4566541");
+        Customer customer9 = new Customer(9, "Årstaskolan", "Skolgatan 1, Umeå", "Sigrid Pettersson", "070-0987444");
+        Customer customer10 = new Customer(10, "Saab Space Center", "Allegatan 76, Karlstad", "Sune Damgard", "070-45456689");
 
         customers.add(customer1);
         customers.add(customer2);
+        customers.add(customer3);
+        customers.add(customer4);
+        customers.add(customer5);
+        customers.add(customer6);
+        customers.add(customer7);
+        customers.add(customer8);
+        customers.add(customer9);
+        customers.add(customer10);
 
-        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1,1);
-        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2,1);
-        WorkOrder workOrder3 = new WorkOrder(3, "2020-09-25 10:30", "Medicingatan 4", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, 1);
-        WorkOrder workOrder4 = new WorkOrder(4, "2020-09-21 08:30", "Bilgatan 8", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, 1);
+        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1,1);
+        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2,1);
+        WorkOrder workOrder3 = new WorkOrder(3, "2020-09-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, 1);
+        WorkOrder workOrder4 = new WorkOrder(4, "2020-09-21 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, 1);
+        WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, employee3, 1);
+        WorkOrder workOrder6 = new WorkOrder(6, "2021-01-07 13:00", "Mogatan 44, Anderstorp", "Årlig service av 4 entredörrar", "Stig Axelsson 070-4598777", customer1, employee3, 1);
+        WorkOrder workOrder7 = new WorkOrder(7, "2020-11-08 07:30", "Storgatan 8, Vimmerby", "Installation av armaturer i serverrum", "Anna Bergendahl 070-4323456", customer1, employee3, 1);
+        WorkOrder workOrder8 = new WorkOrder(8, "2020-09-29 11:00", "Lilla vägen 2, Stockholm", "Nybyggnation av serverskåp", "Ann-Louice Eriksson 076-0477666", customer1, employee3, 1);
+        WorkOrder workOrder9 = new WorkOrder(9, "2021-02-21 14:00", "Hjortronstigen 34, Sundsvall", "Service av transportbana för paket", "Sten Wolter 070-9889765", customer1, employee3, 1);
+        WorkOrder workOrder10 = new WorkOrder(10, "2020-12-13 07:00", "Bertil Larssons Gata 1, Kiruna", "Service av AC i serverrum", "Anders Linné 070-3434222", customer1, employee3, 1);
 
         workOrders.add(workOrder1);
         workOrders.add(workOrder2);
         workOrders.add(workOrder3);
         workOrders.add(workOrder4);
+        workOrders.add(workOrder5);
+        workOrders.add(workOrder6);
+        workOrders.add(workOrder7);
+        workOrders.add(workOrder8);
+        workOrders.add(workOrder8);
+        workOrders.add(workOrder10);
     }
 
     private ArrayList<WorkOrder> getWorkOrders(int employeeId) {
