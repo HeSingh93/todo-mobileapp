@@ -11,7 +11,7 @@
         android:id="@+id/linearlayout1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/text_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
                 android:text="@string/accept" />
 
             <Button
-                android:id="@+id/declineButttonOrderDetails"
+                android:id="@+id/declineButtonOrderDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

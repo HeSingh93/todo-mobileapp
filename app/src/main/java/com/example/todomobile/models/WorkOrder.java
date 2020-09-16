@@ -119,6 +119,10 @@ public class WorkOrder implements Parcelable {
         return employee;
     }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     public int getStatus() {
         return status;
     }

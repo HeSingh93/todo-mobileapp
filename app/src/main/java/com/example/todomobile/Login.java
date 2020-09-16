@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
                         userNameEditText.requestFocus();
                     } else {
                         ArrayList<WorkOrder> workOrdersForEmployee = getWorkOrders(employeeId);
-                        Intent intent = new Intent(Login.this, OrderList.class);
+                        Intent intent = new Intent(Login.this, OrderDetail.class);
                         intent.putParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE", workOrdersForEmployee);
 
                         startActivity(intent);
@@ -88,12 +88,12 @@ public class Login extends AppCompatActivity {
         Employee employee2 = new Employee(2, "Anna", "Andersson", "073-777777");
         Employee employee3 = new Employee(3, "Gustav", "Gustavsson", "070-123456");
         Employee employee4 = new Employee(4, "Sofia", "Larsson", "070-3456750");
-        Employee employee5 = new Employee(4, "Andreas", "Lindsten", "070-8856450");
-        Employee employee6 = new Employee(4, "Mikael", "Ludvigsson", "070-7398633");
-        Employee employee7 = new Employee(4, "David", "Andersson", "070-9045553");
-        Employee employee8 = new Employee(4, "Bo", "Adaktusson", "070-1232178");
-        Employee employee9 = new Employee(4, "Isabell", "Löv", "076-9976345");
-        Employee employee10 = new Employee(4, "Emelie", "Johanson", "070-7503487");
+        Employee employee5 = new Employee(5, "Andreas", "Lindsten", "070-8856450");
+        Employee employee6 = new Employee(6, "Mikael", "Ludvigsson", "070-7398633");
+        Employee employee7 = new Employee(7, "David", "Andersson", "070-9045553");
+        Employee employee8 = new Employee(8, "Bo", "Adaktusson", "070-1232178");
+        Employee employee9 = new Employee(9, "Isabell", "Löv", "076-9976345");
+        Employee employee10 = new Employee(10, "Emelie", "Johanson", "070-7503487");
 
         employees.add(employee1);
         employees.add(employee2);
@@ -109,13 +109,13 @@ public class Login extends AppCompatActivity {
         LoginDetails loginDetails1 = new LoginDetails("Henrik", "lösenord", 1);
         LoginDetails loginDetails2 = new LoginDetails("Anna", "hejhej", 2);
         LoginDetails loginDetails3 = new LoginDetails("Gustav", "password", 3);
-        LoginDetails loginDetails4 = new LoginDetails("Sofia", "äpple", 3);
-        LoginDetails loginDetails5 = new LoginDetails("Andreas", "Cykelsadel", 3);
-        LoginDetails loginDetails6 = new LoginDetails("Mikael", "skogen", 3);
-        LoginDetails loginDetails7 = new LoginDetails("David", "barnen", 3);
-        LoginDetails loginDetails8 = new LoginDetails("Bo", "jobbet", 3);
-        LoginDetails loginDetails9 = new LoginDetails("Isabell", "skolan", 3);
-        LoginDetails loginDetails10 = new LoginDetails("Emelie", "granskog", 3);
+        LoginDetails loginDetails4 = new LoginDetails("Sofia", "äpple", 4);
+        LoginDetails loginDetails5 = new LoginDetails("Andreas", "Cykelsadel", 5);
+        LoginDetails loginDetails6 = new LoginDetails("Mikael", "skogen", 6);
+        LoginDetails loginDetails7 = new LoginDetails("David", "barnen", 7);
+        LoginDetails loginDetails8 = new LoginDetails("Bo", "jobbet", 8);
+        LoginDetails loginDetails9 = new LoginDetails("Isabell", "skolan", 9);
+        LoginDetails loginDetails10 = new LoginDetails("Emelie", "granskog", 10);
 
         loginDetails.add(loginDetails1);
         loginDetails.add(loginDetails2);
