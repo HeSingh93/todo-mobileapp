@@ -6,24 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".OrderDetail">
 
+
     <LinearLayout
         android:id="@+id/linearlayout1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorPrimaryLight"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageView
-        android:id="@+id/imageview1"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#2783A8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageview3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#2783A8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="date" />
+
+        <TextView
+            android:id="@+id/customerTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="customer" />
+
+        <TextView
+            android:id="@+id/addressTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="address" />
+
+        <TextView
+            android:id="@+id/workDescriptionTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="work description" />
+
+        <TextView
+            android:id="@+id/contactTextOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_text" />
+
+        <TextView
+            android:id="@+id/contactInfoTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="contact info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/acceptButtonOrderDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorAcceptButton"
+                android:text="@string/accept" />
+
+            <Button
+                android:id="@+id/declineButttonOrderDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorDeclineButton"
+                android:text="@string/decline" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/finishedButtonOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/work_finished" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

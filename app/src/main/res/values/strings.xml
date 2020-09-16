@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Todo Mobile</string>
+    <string name="contact_text">Kontaktperson:</string>
+    <string name="accept">Acceptera</string>
+    <string name="decline">Acceptera ej</string>
+    <string name="work_finished">Rapportera som klar</string>
 </resources>

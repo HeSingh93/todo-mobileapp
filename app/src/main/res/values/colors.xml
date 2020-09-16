@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#005679</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorPrimaryLight">#62b3da</color>
+    <color name="colorDeclineButton">#ad4741</color>
+    <color name="colorAcceptButton">#32ad80</color>
+    <color name="text_background">#FFFFFF</color>
 </resources>
