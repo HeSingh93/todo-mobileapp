@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WorkOrder implements Parcelable {
 
@@ -178,5 +179,20 @@ public class WorkOrder implements Parcelable {
                 + "\nCustomer: " + customer.getCompanyName() + " Address: " + address
                 + "\nContact info: " + contactInfo
                 + "\nWork description: " + workDescription;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkOrder workOrder = (WorkOrder) o;
+        return id == workOrder.id &&
+                dateTimeInfo.equals(workOrder.dateTimeInfo) &&
+                address.equals(workOrder.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateTimeInfo, address);
     }
 }

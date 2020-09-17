@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,8 +14,11 @@ import android.widget.TextView;
 import com.example.todomobile.models.WorkOrder;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OrderDetail extends ToDoActivity {
+
+    private static final String TAG = "OrderDetail";
 
     private WorkOrder currentWorkOrder;
     private ArrayList<WorkOrder> workOrders;
@@ -32,8 +38,17 @@ public class OrderDetail extends ToDoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
 
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         currentWorkOrder = getIntent().getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
         workOrders = getIntent().getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
+
+        for (WorkOrder workOrder : workOrders) {
+            if (workOrder.equals(currentWorkOrder)){
+                currentWorkOrder = workOrder;
+                break;
+            }
+        }
 
         dateTextView = findViewById(R.id.dateTextViewOrderDetails);
         companyTextView = findViewById(R.id.customerTextViewOrderDetails);
@@ -51,7 +66,16 @@ public class OrderDetail extends ToDoActivity {
         workDescriptionTextView.setText(currentWorkOrder.getWorkDescription());
         contactInfoTextView.setText(currentWorkOrder.getContactInfo());
 
-        jobFinishedButton.setEnabled(false);
+        if(currentWorkOrder.getStatus() == STATUS_ACCEPTED) {
+            acceptButton.setEnabled(false);
+            acceptButton.setVisibility(View.INVISIBLE);
+            declineButton.setEnabled(false);
+            declineButton.setVisibility(View.INVISIBLE);
+            jobFinishedButton.setEnabled(true);
+        } else {
+            jobFinishedButton.setEnabled(false);
+        }
+
 
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,4 +113,27 @@ public class OrderDetail extends ToDoActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            onBackClicked();
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackClicked(){
+        Intent intent = new Intent(this, OrderList.class);
+        intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
+        startActivity(intent);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
 }
