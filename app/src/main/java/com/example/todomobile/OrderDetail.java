@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,8 +14,11 @@ import android.widget.TextView;
 import com.example.todomobile.models.WorkOrder;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OrderDetail extends ToDoActivity {
+
+    private static final String TAG = "OrderDetail";
 
     private WorkOrder currentWorkOrder;
     private ArrayList<WorkOrder> workOrders;
@@ -32,8 +38,13 @@ public class OrderDetail extends ToDoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
 
-        currentWorkOrder = getIntent().getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
-        workOrders = getIntent().getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+        intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
+        currentWorkOrder = intent.getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
+        workOrders = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
+
 
         dateTextView = findViewById(R.id.dateTextViewOrderDetails);
         companyTextView = findViewById(R.id.customerTextViewOrderDetails);
@@ -88,5 +99,27 @@ public class OrderDetail extends ToDoActivity {
                 startActivity(jobFinishedIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            onBackClicked();
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackClicked(){
+        Intent backIntent = new Intent(this, OrderList.class);
+        backIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
+        startActivity(backIntent);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }

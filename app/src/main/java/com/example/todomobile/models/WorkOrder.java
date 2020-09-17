@@ -4,9 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WorkOrder implements Parcelable {
 
@@ -178,5 +180,23 @@ public class WorkOrder implements Parcelable {
                 + "\nCustomer: " + customer.getCompanyName() + " Address: " + address
                 + "\nContact info: " + contactInfo
                 + "\nWork description: " + workDescription;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (obj == this) {
+            return true;
+        }
+        if ((obj == null) || (obj.getClass() != this.getClass())) {
+            return false;
+        }
+
+        return (this.id == ((WorkOrder)obj).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
