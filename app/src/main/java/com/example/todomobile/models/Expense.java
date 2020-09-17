@@ -17,6 +17,10 @@ public class Expense implements Parcelable {
         this.description = description;
     }
 
+    public Expense(double amount, String description) {
+        this(1, amount, description);
+    }
+
     protected Expense(Parcel in) {
         id = in.readInt();
         amount = in.readDouble();
