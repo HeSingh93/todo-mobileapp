@@ -20,19 +20,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/imageview3"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="#2783A8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/dateTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -42,6 +36,8 @@
             android:id="@+id/customerTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:textSize="18sp"
             tools:text="customer" />
 
@@ -49,6 +45,8 @@
             android:id="@+id/addressTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:textSize="18sp"
             tools:text="address" />
 
@@ -56,18 +54,24 @@
             android:id="@+id/workDescriptionTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             tools:text="work description" />
 
         <TextView
             android:id="@+id/contactTextOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/contact_text" />
 
         <TextView
             android:id="@+id/contactInfoTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             tools:text="contact info" />
 
         <LinearLayout
