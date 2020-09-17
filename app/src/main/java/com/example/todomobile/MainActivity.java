@@ -9,7 +9,7 @@ import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.LoginDetails;
 import com.example.todomobile.models.WorkOrder;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ToDoActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

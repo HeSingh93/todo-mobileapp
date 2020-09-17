@@ -17,7 +17,7 @@ import com.example.todomobile.models.WorkOrder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login extends AppCompatActivity {
+public class Login extends ToDoActivity {
 
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -60,8 +60,8 @@ public class Login extends AppCompatActivity {
                         userNameEditText.requestFocus();
                     } else {
                         ArrayList<WorkOrder> workOrdersForEmployee = getWorkOrders(employeeId);
-                        Intent intent = new Intent(Login.this, OrderDetail.class);
-                        intent.putParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE", workOrdersForEmployee);
+                        Intent intent = new Intent(Login.this, OrderList.class);
+                        intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrdersForEmployee);
 
                         startActivity(intent);
                     }
@@ -150,16 +150,16 @@ public class Login extends AppCompatActivity {
         customers.add(customer9);
         customers.add(customer10);
 
-        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1,1);
-        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2,1);
-        WorkOrder workOrder3 = new WorkOrder(3, "2020-09-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, 1);
-        WorkOrder workOrder4 = new WorkOrder(4, "2020-09-21 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, 1);
-        WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, employee3, 1);
-        WorkOrder workOrder6 = new WorkOrder(6, "2021-01-07 13:00", "Mogatan 44, Anderstorp", "Årlig service av 4 entredörrar", "Stig Axelsson 070-4598777", customer1, employee3, 1);
-        WorkOrder workOrder7 = new WorkOrder(7, "2020-11-08 07:30", "Storgatan 8, Vimmerby", "Installation av armaturer i serverrum", "Anna Bergendahl 070-4323456", customer1, employee3, 1);
-        WorkOrder workOrder8 = new WorkOrder(8, "2020-09-29 11:00", "Lilla vägen 2, Stockholm", "Nybyggnation av serverskåp", "Ann-Louice Eriksson 076-0477666", customer1, employee3, 1);
-        WorkOrder workOrder9 = new WorkOrder(9, "2021-02-21 14:00", "Hjortronstigen 34, Sundsvall", "Service av transportbana för paket", "Sten Wolter 070-9889765", customer1, employee3, 1);
-        WorkOrder workOrder10 = new WorkOrder(10, "2020-12-13 07:00", "Bertil Larssons Gata 1, Kiruna", "Service av AC i serverrum", "Anders Linné 070-3434222", customer1, employee3, 1);
+        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1,STATUS_ASSIGNED);
+        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2,STATUS_ASSIGNED);
+        WorkOrder workOrder3 = new WorkOrder(3, "2020-09-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder4 = new WorkOrder(4, "2020-09-21 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder6 = new WorkOrder(6, "2021-01-07 13:00", "Mogatan 44, Anderstorp", "Årlig service av 4 entredörrar", "Stig Axelsson 070-4598777", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder7 = new WorkOrder(7, "2020-11-08 07:30", "Storgatan 8, Vimmerby", "Installation av armaturer i serverrum", "Anna Bergendahl 070-4323456", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder8 = new WorkOrder(8, "2020-09-29 11:00", "Lilla vägen 2, Stockholm", "Nybyggnation av serverskåp", "Ann-Louice Eriksson 076-0477666", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder9 = new WorkOrder(9, "2021-02-21 14:00", "Hjortronstigen 34, Sundsvall", "Service av transportbana för paket", "Sten Wolter 070-9889765", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder10 = new WorkOrder(10, "2020-12-13 07:00", "Bertil Larssons Gata 1, Kiruna", "Service av AC i serverrum", "Anders Linné 070-3434222", customer1, employee3, STATUS_ASSIGNED);
 
         workOrders.add(workOrder1);
         workOrders.add(workOrder2);
@@ -169,7 +169,7 @@ public class Login extends AppCompatActivity {
         workOrders.add(workOrder6);
         workOrders.add(workOrder7);
         workOrders.add(workOrder8);
-        workOrders.add(workOrder8);
+        workOrders.add(workOrder9);
         workOrders.add(workOrder10);
     }
 

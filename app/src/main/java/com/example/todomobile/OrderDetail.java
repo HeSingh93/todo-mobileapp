@@ -12,7 +12,7 @@ import com.example.todomobile.models.WorkOrder;
 
 import java.util.ArrayList;
 
-public class OrderDetail extends AppCompatActivity {
+public class OrderDetail extends ToDoActivity {
 
     private WorkOrder currentWorkOrder;
     private ArrayList<WorkOrder> workOrders;
@@ -32,8 +32,8 @@ public class OrderDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
 
-        currentWorkOrder = getIntent().getParcelableExtra("CURRENT_WORKORDER_MESSAGE");
-        workOrders = getIntent().getParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE");
+        currentWorkOrder = getIntent().getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
+        workOrders = getIntent().getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
 
         dateTextView = findViewById(R.id.dateTextViewOrderDetails);
         companyTextView = findViewById(R.id.customerTextViewOrderDetails);
@@ -56,7 +56,7 @@ public class OrderDetail extends AppCompatActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentWorkOrder.setStatus(2);
+                currentWorkOrder.setStatus(STATUS_ACCEPTED);
                 acceptButton.setEnabled(false);
                 acceptButton.setVisibility(View.INVISIBLE);
                 declineButton.setEnabled((false));
@@ -68,11 +68,12 @@ public class OrderDetail extends AppCompatActivity {
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentWorkOrder.setStatus(STATUS_UNASSIGNED);
                 currentWorkOrder.setEmployee(null);
                 workOrders.remove(currentWorkOrder);
 
                 Intent declineIntent = new Intent(OrderDetail.this, OrderList.class);
-                declineIntent.putParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE", workOrders);
+                declineIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
                 startActivity(declineIntent);
             }
         });
@@ -80,10 +81,10 @@ public class OrderDetail extends AppCompatActivity {
         jobFinishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentWorkOrder.setStatus(3);
+                currentWorkOrder.setStatus(STATUS_DONE);
                 Intent jobFinishedIntent = new Intent(OrderDetail.this, TimeAndExpenses.class);
-                jobFinishedIntent.putParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE", workOrders);
-                jobFinishedIntent.putExtra("CURRENT_WORKORDER_MESSAGE", currentWorkOrder);
+                jobFinishedIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
+                jobFinishedIntent.putExtra(CURRENT_WORKORDER_MESSAGE, currentWorkOrder);
                 startActivity(jobFinishedIntent);
             }
         });

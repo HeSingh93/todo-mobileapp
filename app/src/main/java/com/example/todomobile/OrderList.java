@@ -12,7 +12,7 @@ import com.example.todomobile.models.WorkOrder;
 
 import java.util.List;
 
-public class OrderList extends AppCompatActivity {
+public class OrderList extends ToDoActivity {
 
     private List<WorkOrder> worksorders;
 
@@ -23,7 +23,7 @@ public class OrderList extends AppCompatActivity {
 
         Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
-        worksorders = intent.getParcelableArrayListExtra("WORKORDERS_LIST_MESSAGE");
+        worksorders = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
 
         ListView orderListView = findViewById(R.id.listviewID);
         CustomListAdapter adapter = new CustomListAdapter(this, worksorders);

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class TimeAndExpenses extends AppCompatActivity {
+public class TimeAndExpenses extends ToDoActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
