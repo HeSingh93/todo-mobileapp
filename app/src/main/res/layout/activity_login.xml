@@ -35,7 +35,7 @@
             android:layout_marginRight="50dp"
             android:background="#FBFBFB"
             android:digits="abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVXYZÅÄÖ1234567890@.-_"
-            android:hint="Username"
+            android:hint="Användarnamn"
             android:text="" />
 
         <EditText
@@ -47,7 +47,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:background="#FBFBFB"
-            android:hint="Password"
+            android:hint="Lösenord"
             android:text="" />
 
         <Button
@@ -58,7 +58,7 @@
             android:layout_marginTop="25dp"
             android:background="#DBDBDB"
             android:linksClickable="false"
-            android:text="Log in"
+            android:text="Logga in"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 

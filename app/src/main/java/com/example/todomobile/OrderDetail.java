@@ -32,6 +32,7 @@ public class OrderDetail extends ToDoActivity {
     private Button acceptButton;
     private Button declineButton;
     private Button jobFinishedButton;
+    private Button logoutButtonOrderdetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,15 @@ public class OrderDetail extends ToDoActivity {
         setContentView(R.layout.activity_order_detail);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        logoutButtonOrderdetail = findViewById(R.id.buttonOrderdetailLogout);
+        logoutButtonOrderdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrderDetail.this, Login.class));
+
+            }
+        });
 
         currentWorkOrder = getIntent().getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
         workOrders = getIntent().getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);

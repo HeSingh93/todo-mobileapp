@@ -32,6 +32,7 @@ public class TimeAndExpenses extends ToDoActivity {
     private EditText textNotes;
 
     private Button buttonSave;
+    private Button buttonTimeAndExpencesLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,15 @@ public class TimeAndExpenses extends ToDoActivity {
 
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
+
+        buttonTimeAndExpencesLogout = findViewById(R.id.buttonTimeAndExpencesLogout);
+        buttonTimeAndExpencesLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TimeAndExpenses.this, Login.class));
+
+            }
+        });
 
         finishedWorkOrder = intent.getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
         workOrderList = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);

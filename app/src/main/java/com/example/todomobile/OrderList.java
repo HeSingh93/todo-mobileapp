@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class OrderList extends ToDoActivity {
     private ArrayList<WorkOrder> orderListNotAccepted;
     private ArrayList<WorkOrder> orderListAccepted;
 
+    private Button buttonLogOut;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,15 @@ public class OrderList extends ToDoActivity {
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
         orderlistActiveEmployee = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
+
+        buttonLogOut = findViewById(R.id.buttonOrderlistLogout);
+        buttonLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrderList.this, Login.class));
+
+            }
+        });
 
         orderListAccepted = new ArrayList<>();
         orderListNotAccepted = new ArrayList<>();
@@ -60,10 +72,6 @@ public class OrderList extends ToDoActivity {
                 startActivity(intent);
             }
         });
-
-       /* final ListView orderListViewAcceptedWorkOrder = findViewById(R.id.listviewNotAcceptedWorkorderID);
-        //CustomListAdapter adapter = new CustomListAdapter(this, orderListAccepted);
-        orderListView.setAdapter(adapter);*/
 
         orderListNotAcceptedView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
