@@ -37,7 +37,5 @@ public class CustomListAdapter extends ArrayAdapter {
         addressTextViewID.setText(workOrders.get(position).getAddress());
 
         return rowView;
-
     }
-
 }
