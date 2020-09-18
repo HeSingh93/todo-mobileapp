@@ -61,11 +61,11 @@ public class OrderList extends ToDoActivity {
             }
         });
 
-        final ListView orderListViewAcceptedWorkOrder = findViewById(R.id.listviewNotAcceptedWorkorderID);
+       /* final ListView orderListViewAcceptedWorkOrder = findViewById(R.id.listviewNotAcceptedWorkorderID);
         //CustomListAdapter adapter = new CustomListAdapter(this, orderListAccepted);
-        orderListView.setAdapter(adapter);
+        orderListView.setAdapter(adapter);*/
 
-        orderListViewAcceptedWorkOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        orderListNotAcceptedView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(OrderList.this, OrderDetail.class);
