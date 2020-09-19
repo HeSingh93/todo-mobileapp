@@ -16,6 +16,8 @@ import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.WorkOrder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class OrderList extends ToDoActivity {
@@ -62,6 +64,21 @@ public class OrderList extends ToDoActivity {
         final ListView orderListView = findViewById(R.id.listviewID);
         CustomListAdapter adapter = new CustomListAdapter(this, orderListAccepted);
         orderListView.setAdapter(adapter);
+
+
+        Collections.sort(orderListNotAccepted, new Comparator<WorkOrder>() {
+            @Override
+            public int compare(WorkOrder o1, WorkOrder o2) {
+                return o1.getDateTimeInfo().compareTo(o2.getDateTimeInfo());
+            }
+        });
+
+        Collections.sort(orderListAccepted, new Comparator<WorkOrder>() {
+            @Override
+            public int compare(WorkOrder o1, WorkOrder o2) {
+                return o1.getDateTimeInfo().compareTo(o2.getDateTimeInfo());
+            }
+        });
 
         orderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
