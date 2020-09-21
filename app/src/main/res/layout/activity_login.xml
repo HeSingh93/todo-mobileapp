@@ -48,7 +48,8 @@
             android:layout_marginRight="50dp"
             android:background="#FBFBFB"
             android:hint="Lösenord"
-            android:text="" />
+            android:text=""
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/btnLogin"
