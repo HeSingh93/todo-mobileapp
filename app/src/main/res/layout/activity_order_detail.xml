@@ -31,39 +31,42 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/dateTextViewOrderDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:text="date" />
-
-        <TextView
             android:id="@+id/customerTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textSize="18sp"
+            android:textSize="24sp"
+            android:textStyle="bold"
             tools:text="customer" />
+
+        <TextView
+            android:id="@+id/dateTextViewOrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="date" />
 
         <TextView
             android:id="@+id/addressTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textSize="18sp"
             tools:text="address" />
 
         <TextView
             android:id="@+id/workDescriptionTextViewOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             tools:text="work description" />
@@ -72,6 +75,7 @@
             android:id="@+id/contactTextOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="@string/contact_text" />
@@ -82,11 +86,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textSize="14sp"
             tools:text="contact info" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
             <Button
@@ -94,7 +100,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorAcceptButton"
                 android:text="@string/accept" />
 
             <Button
@@ -110,7 +115,7 @@
             android:id="@+id/finishedButtonOrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginTop="10dp"
             android:text="@string/work_finished" />
 
     </LinearLayout>
