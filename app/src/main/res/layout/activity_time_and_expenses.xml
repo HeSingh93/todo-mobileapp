@@ -44,9 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:layout_marginRight="10dp"
-            android:background="#FBFBFB"
+            android:background="@drawable/border_style"
             android:hint="Travel time" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:text="Work time"
             android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#FBFBFB"
+                android:background="@drawable/border_style"
                 android:hint="Start time" />
 
             <EditText
@@ -78,7 +78,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#FBFBFB"
+                android:background="@drawable/border_style"
                 android:hint="End time"
                 android:textAlignment="textStart" />
 
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:text="Expences"
             android:textStyle="bold"
             />
@@ -105,7 +105,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#FBFBFB"
+                android:background="@drawable/border_style"
                 android:hint="Cost" />
 
             <EditText
@@ -114,7 +114,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#FBFBFB"
+                android:background="@drawable/border_style"
                 android:hint="Description of cost" />
 
         </LinearLayout>
@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:text="Notes"
             android:textStyle="bold" />
 
@@ -132,9 +132,10 @@
             android:id="@+id/textNotes"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#FBFBFB"
+            android:background="@drawable/border_style"
             android:textAlignment="textStart" />
 
         <Button
