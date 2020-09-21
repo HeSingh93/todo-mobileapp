@@ -1,9 +1,9 @@
 package com.example.todomobile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +14,7 @@ import com.example.todomobile.models.WorkOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TimeAndExpenses extends ToDoActivity {
 
@@ -38,6 +39,8 @@ public class TimeAndExpenses extends ToDoActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_and_expenses);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
@@ -97,5 +100,24 @@ public class TimeAndExpenses extends ToDoActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home) {
+            onBackClicked();
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    public void onBackClicked(){
+        Intent intent = new Intent(this, OrderDetail.class);
+        intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrderList);
+        intent.putExtra(CURRENT_WORKORDER_MESSAGE, finishedWorkOrder);
+        startActivity(intent);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 }
