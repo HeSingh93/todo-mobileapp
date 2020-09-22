@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".OrderDetail">
 
-    <Button
-        android:id="@+id/buttonOrderdetailLogout"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:text="Logga ut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearlayout1"
         android:layout_width="0dp"

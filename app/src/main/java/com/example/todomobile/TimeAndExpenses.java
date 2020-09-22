@@ -3,6 +3,7 @@ package com.example.todomobile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,6 @@ public class TimeAndExpenses extends ToDoActivity {
     private EditText textNotes;
 
     private Button buttonSave;
-    private Button buttonTimeAndExpencesLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +44,6 @@ public class TimeAndExpenses extends ToDoActivity {
 
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
-
-        buttonTimeAndExpencesLogout = findViewById(R.id.buttonTimeAndExpencesLogout);
-        buttonTimeAndExpencesLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(TimeAndExpenses.this, Login.class));
-
-            }
-        });
 
         finishedWorkOrder = intent.getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
         workOrderList = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
@@ -106,7 +97,10 @@ public class TimeAndExpenses extends ToDoActivity {
             onBackClicked();
             finish();
             return true;
+        } else if (item.getItemId() == R.id.logout) {
+            startActivity(new Intent(TimeAndExpenses.this, Login.class));
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -118,6 +112,8 @@ public class TimeAndExpenses extends ToDoActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_menu, menu);
         return true;
     }
 }

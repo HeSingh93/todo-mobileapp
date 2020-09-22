@@ -1,16 +1,21 @@
 package com.example.todomobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.WorkOrder;
@@ -26,8 +31,6 @@ public class OrderList extends ToDoActivity {
     private ArrayList<WorkOrder> orderListNotAccepted;
     private ArrayList<WorkOrder> orderListAccepted;
 
-    private Button buttonLogOut;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +39,6 @@ public class OrderList extends ToDoActivity {
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
         orderlistActiveEmployee = intent.getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
-
-        buttonLogOut = findViewById(R.id.buttonOrderlistLogout);
-        buttonLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrderList.this, Login.class));
-
-            }
-        });
 
         orderListAccepted = new ArrayList<>();
         orderListNotAccepted = new ArrayList<>();
@@ -99,5 +93,22 @@ public class OrderList extends ToDoActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                startActivity(new Intent(OrderList.this, Login.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

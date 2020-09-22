@@ -4,10 +4,13 @@ package com.example.todomobile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.example.todomobile.models.WorkOrder;
 
@@ -30,7 +33,6 @@ public class OrderDetail extends ToDoActivity {
     private Button acceptButton;
     private Button declineButton;
     private Button jobFinishedButton;
-    private Button logoutButtonOrderdetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,6 @@ public class OrderDetail extends ToDoActivity {
         setContentView(R.layout.activity_order_detail);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        logoutButtonOrderdetail = findViewById(R.id.buttonOrderdetailLogout);
-        logoutButtonOrderdetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrderDetail.this, Login.class));
-
-            }
-        });
 
         currentWorkOrder = getIntent().getParcelableExtra(CURRENT_WORKORDER_MESSAGE);
         workOrders = getIntent().getParcelableArrayListExtra(WORKORDER_LIST_MESSAGE);
@@ -128,6 +121,8 @@ public class OrderDetail extends ToDoActivity {
             onBackClicked();
             finish();
             return true;
+        } else if (item.getItemId() == R.id.logout) {
+            startActivity(new Intent(OrderDetail.this, Login.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -139,9 +134,9 @@ public class OrderDetail extends ToDoActivity {
         startActivity(intent);
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_menu, menu);
         return true;
     }
-
 }
