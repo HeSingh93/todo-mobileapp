@@ -1,14 +1,15 @@
 package com.example.todomobile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.todomobile.api.entities.WorkOrderEntity;
+import com.example.todomobile.api.retrofitservices.RetrofitHelper;
 import com.example.todomobile.models.Customer;
 import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.LoginDetails;
@@ -17,7 +18,13 @@ import com.example.todomobile.models.WorkOrder;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Login extends ToDoActivity {
+
+    private Bundle apiData;
 
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -33,13 +40,14 @@ public class Login extends ToDoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        apiData = new Bundle();
         employees = new ArrayList<>();
         loginDetails = new ArrayList<>();
         customers = new ArrayList<>();
         workOrders = new ArrayList<>();
 
         getData();
-
+        loadApi();
         userNameEditText = findViewById(R.id.txtUserName);
         passwordEditText = findViewById(R.id.txtPassword);
         loginButton = findViewById(R.id.btnLogin);
@@ -74,7 +82,7 @@ public class Login extends ToDoActivity {
     private int validateLogin(String username, String password) {
 
         for (LoginDetails loginDetail : loginDetails) {
-            if((username.equals(loginDetail.getUsername())) && (password.equals(loginDetail.getPassword()))) {
+            if ((username.equals(loginDetail.getUsername())) && (password.equals(loginDetail.getPassword()))) {
                 return loginDetail.getEmployeeId();
             }
         }
@@ -150,8 +158,8 @@ public class Login extends ToDoActivity {
         customers.add(customer9);
         customers.add(customer10);
 
-        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1,STATUS_ASSIGNED);
-        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2,STATUS_ASSIGNED);
+        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1, STATUS_ASSIGNED);
+        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2, STATUS_ASSIGNED);
         WorkOrder workOrder3 = new WorkOrder(3, "2021-03-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, STATUS_ASSIGNED);
         WorkOrder workOrder4 = new WorkOrder(4, "2021-01-07 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, STATUS_ACCEPTED);
         WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, employee3, STATUS_ACCEPTED);
@@ -181,5 +189,30 @@ public class Login extends ToDoActivity {
             }
         }
         return workOrdersForEmployee;
+    }
+
+    private void loadApi() {
+        getCurrentWorkOrders();
+    }
+
+    private void getCurrentWorkOrders() {
+        final ArrayList<WorkOrderEntity> currentWorkOrders  = new ArrayList<>();
+        apiData.putParcelableArrayList("Workorders", currentWorkOrders);
+
+        RetrofitHelper.getAPIService().getCurrentWorkOrders().enqueue(new Callback<List<WorkOrderEntity>>() {
+            @Override
+            public void onResponse(Call<List<WorkOrderEntity>> call, Response<List<WorkOrderEntity>> response) {
+                if(response.body() != null) {
+                    currentWorkOrders.addAll(response.body());
+                    Log.i("Load", "WORKORDERS COLLECTED SUCCESSFULLY");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WorkOrderEntity>> call, Throwable t) {
+                Log.i("FailedLoad", "WORK ORDERS FAILED TO COLLECT");
+                t.printStackTrace();
+            }
+        });
     }
 }

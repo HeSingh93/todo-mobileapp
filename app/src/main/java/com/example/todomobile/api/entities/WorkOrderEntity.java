@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class WorkOrderEntity implements Parcelable {
 
     @SerializedName("id")
@@ -21,12 +23,6 @@ public class WorkOrderEntity implements Parcelable {
 
     @SerializedName("contact_info")
     private String contactInfo;
-
-    @SerializedName("customer_id")
-    private Integer customerId;
-
-    @SerializedName("employee_id")
-    private Integer employeeId;
 
     @SerializedName("status")
     private Integer status;
@@ -45,6 +41,9 @@ public class WorkOrderEntity implements Parcelable {
 
     @SerializedName("time")
     private String time;
+
+    @SerializedName("expenses")
+    private List<ExpensesEntity> expenses;
 
     public WorkOrderEntity() {
         //Empty no-args constructor
@@ -69,14 +68,6 @@ public class WorkOrderEntity implements Parcelable {
 
     public String getContactInfo() {
         return contactInfo;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
     }
 
     public Integer getStatus() {
@@ -124,14 +115,6 @@ public class WorkOrderEntity implements Parcelable {
         this.contactInfo = contactInfo;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
     public void setStatus(Integer status) {
         this.status = status;
     }
@@ -167,16 +150,6 @@ public class WorkOrderEntity implements Parcelable {
         workDescription = in.readString();
         contactInfo = in.readString();
         if (in.readByte() == 0) {
-            customerId = null;
-        } else {
-            customerId = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            employeeId = null;
-        } else {
-            employeeId = in.readInt();
-        }
-        if (in.readByte() == 0) {
             status = null;
         } else {
             status = in.readInt();
@@ -204,18 +177,6 @@ public class WorkOrderEntity implements Parcelable {
         dest.writeString(address);
         dest.writeString(workDescription);
         dest.writeString(contactInfo);
-        if (customerId == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(customerId);
-        }
-        if (employeeId == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(employeeId);
-        }
         if (status == null) {
             dest.writeByte((byte) 0);
         } else {
