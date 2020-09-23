@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:text="Ej accepterade arbetsordrar"
+            android:text="@string/declined_work_orders"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Accepterade arbetsordrar"
+            android:text="@string/accepted_work_orders"
             android:textSize="16sp"
             android:textStyle="bold" />
 

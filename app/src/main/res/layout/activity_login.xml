@@ -61,7 +61,7 @@
             android:layout_marginTop="25dp"
             android:background="#DBDBDB"
             android:linksClickable="false"
-            android:text="Logga in"
+            android:text="@string/log_in"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 

@@ -21,30 +21,38 @@
         <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:gravity="left"
-            android:text="Tid och kostnader"
+            android:text="@string/time_and_expenses"
             android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/labelTravelTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/travel_time"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/textTravelTime"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/border_style"
-            android:hint="Travel time" />
+            android:background="@drawable/border_style" />
 
         <TextView
             android:id="@+id/labelWorkTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="Work time"
+            android:layout_marginTop="10dp"
+            android:text="@string/work_time"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -56,19 +64,21 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/border_style"
-                android:hint="Start time" />
+                android:paddingLeft="5dp"
+                android:hint="Starttid" />
 
             <EditText
                 android:id="@+id/textWorkEndTime"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/border_style"
-                android:hint="End time"
+                android:paddingLeft="5dp"
+                android:hint="Sluttid"
                 android:textAlignment="textStart" />
 
         </LinearLayout>
@@ -77,11 +87,10 @@
             android:id="@+id/labelExpences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="Expences"
-            android:textStyle="bold"
-            />
+            android:layout_marginTop="10dp"
+            android:text="@string/Expenses"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,22 +98,24 @@
 
             <EditText
                 android:id="@+id/textCost"
-                android:layout_width="80dp"
+                android:layout_width="90dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/border_style"
-                android:hint="Cost" />
+                android:paddingLeft="5dp"
+                android:hint="Kostnad" />
 
             <EditText
                 android:id="@+id/textDecriptionCost"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/border_style"
-                android:hint="Description of cost" />
+                android:paddingLeft="5dp"
+                android:hint="Beskrivning" />
 
         </LinearLayout>
 
@@ -112,16 +123,16 @@
             android:id="@+id/labelNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:text="Notes"
+            android:layout_marginTop="10dp"
+            android:text="@string/notes"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/textNotes"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/border_style"
@@ -133,7 +144,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center|center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="Save"
+            android:text="@string/save"
             android:textSize="16sp" />
 
     </LinearLayout>
