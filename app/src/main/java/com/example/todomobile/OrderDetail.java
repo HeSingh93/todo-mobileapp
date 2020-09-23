@@ -106,7 +106,6 @@ public class OrderDetail extends ToDoActivity {
         jobFinishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentWorkOrder.setStatus(STATUS_DONE);
                 Intent jobFinishedIntent = new Intent(OrderDetail.this, TimeAndExpenses.class);
                 jobFinishedIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
                 jobFinishedIntent.putExtra(CURRENT_WORKORDER_MESSAGE, currentWorkOrder);

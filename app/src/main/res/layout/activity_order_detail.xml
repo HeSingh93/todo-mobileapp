@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/work_finished" />
+            android:text="@string/report_time_and_expenses" />
 
     </LinearLayout>
 

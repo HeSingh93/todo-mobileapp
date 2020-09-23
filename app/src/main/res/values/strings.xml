@@ -3,7 +3,7 @@
     <string name="contact_text">Kontaktperson:</string>
     <string name="accept">Acceptera</string>
     <string name="decline">Acceptera ej</string>
-    <string name="work_finished">Rapportera som klar</string>
+    <string name="report_time_and_expenses">Rapportera tid och kostnader</string>
     <string name="log_in">Logga in</string>
     <string name="declined_work_orders">Ej accepterade arbetsordrar</string>
     <string name="accepted_work_orders">Accepterade arbetsordrar</string>
