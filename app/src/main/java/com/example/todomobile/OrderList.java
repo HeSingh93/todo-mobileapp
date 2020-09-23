@@ -10,9 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,10 +56,12 @@ public class OrderList extends ToDoActivity {
         final ListView orderListNotAcceptedView = findViewById(R.id.listviewNotAcceptedWorkorderID);
         CustomListAdapter adapterNotAccepted = new CustomListAdapter(this, orderListNotAccepted);
         orderListNotAcceptedView.setAdapter(adapterNotAccepted);
+        orderListNotAcceptedView.setMinimumHeight(getListViewHeight(orderListNotAcceptedView));
 
         final ListView orderListView = findViewById(R.id.listviewID);
         CustomListAdapter adapter = new CustomListAdapter(this, orderListAccepted);
         orderListView.setAdapter(adapter);
+        orderListView.setMinimumHeight(getListViewHeight(orderListView));
 
 
         Collections.sort(orderListNotAccepted, new Comparator<WorkOrder>() {
@@ -110,5 +114,26 @@ public class OrderList extends ToDoActivity {
                 startActivity(new Intent(OrderList.this, Login.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getListViewHeight(ListView listView) {
+
+        ListAdapter adapter = listView.getAdapter();
+
+        if (adapter == null) {
+            return 0;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams par = listView.getLayoutParams();
+        par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+
+        return par.height;
     }
 }
