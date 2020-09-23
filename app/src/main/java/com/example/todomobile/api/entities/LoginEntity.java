@@ -29,6 +29,11 @@ public class LoginEntity implements Parcelable {
         //Empty no-args constructor
     }
 
+    public LoginEntity(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     protected LoginEntity(Parcel in) {
         if (in.readByte() == 0) {
             id = null;

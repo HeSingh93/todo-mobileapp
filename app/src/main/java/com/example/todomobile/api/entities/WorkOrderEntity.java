@@ -42,6 +42,12 @@ public class WorkOrderEntity implements Parcelable {
     @SerializedName("time")
     private String time;
 
+    @SerializedName("customer")
+    private List<CustomerEntity> customer;
+
+    @SerializedName("employee")
+    private List<EmployeeEntity> employee;
+
     @SerializedName("expenses")
     private List<ExpensesEntity> expenses;
 
@@ -94,6 +100,18 @@ public class WorkOrderEntity implements Parcelable {
         return time;
     }
 
+    public List<CustomerEntity> getCustomer() {
+        return customer;
+    }
+
+    public List<EmployeeEntity> getEmployee() {
+        return employee;
+    }
+
+    public List<ExpensesEntity> getExpenses() {
+        return expenses;
+    }
+
     // Setters
     public void setId(Integer id) {
         this.id = id;
@@ -137,6 +155,18 @@ public class WorkOrderEntity implements Parcelable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setCustomer(List<CustomerEntity> customer) {
+        this.customer = customer;
+    }
+
+    public void setEmployee(List<EmployeeEntity> employee) {
+        this.employee = employee;
+    }
+
+    public void setExpenses(List<ExpensesEntity> expenses) {
+        this.expenses = expenses;
     }
 
     protected WorkOrderEntity(Parcel in) {
@@ -193,6 +223,10 @@ public class WorkOrderEntity implements Parcelable {
         }
         dest.writeString(comment);
         dest.writeString(time);
+        dest.writeList(expenses);
+        dest.writeList(customer);
+        dest.writeList(employee);
+
     }
 
     @Override
