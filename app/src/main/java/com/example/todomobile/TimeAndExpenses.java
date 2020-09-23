@@ -2,12 +2,15 @@ package com.example.todomobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.todomobile.models.Expense;
@@ -19,9 +22,14 @@ import java.util.Objects;
 
 public class TimeAndExpenses extends ToDoActivity {
 
+    private static final String TAG = "TimeAndExpenses";
+
     private WorkOrder finishedWorkOrder;
     private ArrayList<WorkOrder> workOrderList;
     private List<Expense> expenses;
+
+    private LinearLayout mainLayout;
+    private LinearLayout expenseLayout;
 
     private TextView labelWorkTime;
     private TextView labelExpences;
@@ -33,6 +41,7 @@ public class TimeAndExpenses extends ToDoActivity {
     private EditText textDescriptionOfCost;
     private EditText textNotes;
 
+    private Button buttonAddExpense;
     private Button buttonSave;
 
     @Override
@@ -54,6 +63,9 @@ public class TimeAndExpenses extends ToDoActivity {
                 break;
             }
         }
+
+        mainLayout = findViewById(R.id.linearlayout3);
+        expenseLayout = findViewById(R.id.expenseLayout);
 
         labelWorkTime = findViewById(R.id.labelWorkTime);
         labelExpences = findViewById(R.id.labelWorkTime);
@@ -89,6 +101,54 @@ public class TimeAndExpenses extends ToDoActivity {
                 startActivity(timeAndExpencesFinishedIntent);
             }
         });
+
+        buttonAddExpense = findViewById(R.id.extraExpenseButton);
+        buttonAddExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "onClick: Extra expense button clicked");
+
+                int amountWidth = pixelsToDpConversion(90);
+                int descriptionWidth = pixelsToDpConversion(200);
+                int height = pixelsToDpConversion(50);
+                int marginLeftRight = pixelsToDpConversion(10);
+                int marginTop = pixelsToDpConversion(5);
+                int padding = pixelsToDpConversion(5);
+
+                EditText newAmountEditText = new EditText(TimeAndExpenses.this);
+
+                newAmountEditText.setHint(R.string.cost);
+
+                LinearLayout.LayoutParams layoutParamsAmount = new LinearLayout.LayoutParams(amountWidth, height);
+                layoutParamsAmount.setMargins(marginLeftRight, marginTop, marginLeftRight, 0);
+
+                newAmountEditText.setLayoutParams(layoutParamsAmount);
+                newAmountEditText.setPadding(padding,0,0,0);
+                newAmountEditText.setBackgroundResource(R.drawable.border_style);
+
+                EditText newDescriptionEditText = new EditText(TimeAndExpenses.this);
+                newDescriptionEditText.setHint(R.string.description);
+
+                LinearLayout.LayoutParams layoutParamsDescription = new LinearLayout.LayoutParams(descriptionWidth, height);
+                layoutParamsDescription.setMargins(marginLeftRight, marginTop, 0, 0);
+
+                newDescriptionEditText.setLayoutParams(layoutParamsDescription);
+                newDescriptionEditText.setPadding(padding,0,0,0);
+                newDescriptionEditText.setBackgroundResource(R.drawable.border_style);
+
+                LinearLayout newLayout = new LinearLayout(TimeAndExpenses.this);
+                newLayout.setOrientation(LinearLayout.HORIZONTAL);
+                newLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                newLayout.addView(newAmountEditText);
+                newLayout.addView(newDescriptionEditText);
+
+                expenseLayout.addView(newLayout);
+                expenseLayout.invalidate();
+                mainLayout.invalidate();
+            }
+        });
     }
 
     @Override
@@ -115,5 +175,10 @@ public class TimeAndExpenses extends ToDoActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
         return true;
+    }
+
+    private int pixelsToDpConversion (int pixels) {
+        float scale = getResources().getDisplayMetrics().density;
+        return (int)(pixels*scale + 0.5f);
     }
 }
