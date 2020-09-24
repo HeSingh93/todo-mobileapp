@@ -7,31 +7,28 @@ import androidx.annotation.NonNull;
 
 public class Expense implements Parcelable {
 
-    private int id;
     private double amount;
     private String description;
+    private int workOrderId;
 
-    public Expense(int id, double amount, String description) {
-        this.id = id;
+    public Expense(double amount, String description, int workOrderId) {
         this.amount = amount;
         this.description = description;
+        this.workOrderId = workOrderId;
     }
 
-    public Expense(double amount, String description) {
-        this(1, amount, description);
-    }
 
     protected Expense(Parcel in) {
-        id = in.readInt();
         amount = in.readDouble();
         description = in.readString();
+        workOrderId = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
         dest.writeDouble(amount);
         dest.writeString(description);
+        dest.writeInt(workOrderId);
     }
 
     @Override
@@ -51,9 +48,6 @@ public class Expense implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
 
     public double getAmount() {
         return amount;
@@ -61,6 +55,10 @@ public class Expense implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getWorkOrderId() {
+        return workOrderId;
     }
 
     @NonNull

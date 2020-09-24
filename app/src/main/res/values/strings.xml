@@ -17,4 +17,5 @@
     <string name="time_input">YYYYMMDD hh:mm</string>
     <string name="description">Beskrivning</string>
     <string name="cost">Kostnad</string>
+    <string name="extra_expense">Lägg till ytterligare kostnad</string>
 </resources>

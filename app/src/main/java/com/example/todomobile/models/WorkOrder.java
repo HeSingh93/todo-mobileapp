@@ -178,7 +178,8 @@ public class WorkOrder implements Parcelable {
         return "Workorder no " + id + " Time: " + dateTimeInfo
                 + "\nCustomer: " + customer.getCompanyName() + " Address: " + address
                 + "\nContact info: " + contactInfo
-                + "\nWork description: " + workDescription;
+                + "\nWork description: " + workDescription
+                + "\nNumber of expenses: " + expenses.size();
     }
 
     @Override

@@ -41,7 +41,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/border_style" />
+                android:background="@drawable/border_style"
+                android:inputType="numberDecimal" />
 
             <TextView
                 android:id="@+id/labelWorkTime"
@@ -125,6 +126,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/border_style"
                         android:hint="@string/cost"
+                        android:inputType="numberDecimal"
                         android:paddingLeft="5dp" />
 
                     <EditText

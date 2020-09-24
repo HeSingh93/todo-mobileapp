@@ -2,6 +2,7 @@ package com.example.todomobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +45,9 @@ public class TimeAndExpenses extends ToDoActivity {
     private Button buttonAddExpense;
     private Button buttonSave;
 
+    private List<EditText> amountEditTexts;
+    private List<EditText> descriptionEditTexts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +88,12 @@ public class TimeAndExpenses extends ToDoActivity {
         textDescriptionOfCost.setText("");
         textNotes.setText("");
 
+        amountEditTexts = new ArrayList<>();
+        amountEditTexts.add(textCost);
+
+        descriptionEditTexts = new ArrayList<>();
+        descriptionEditTexts.add(textDescriptionOfCost);
+
         buttonSave = findViewById(R.id.buttonSaveTimeAndExpences);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +102,16 @@ public class TimeAndExpenses extends ToDoActivity {
                 finishedWorkOrder.setTravelHours(Double.parseDouble(textTravelTime.getText().toString()));
                 finishedWorkOrder.setTimeStarted(textWorkStartTime.getText().toString());
                 finishedWorkOrder.setTimeFinished(textWorkEndTime.getText().toString());
-                Expense jobExpenses = new Expense(Double.parseDouble((textCost.getText().toString())), textDescriptionOfCost.getText().toString());
-                finishedWorkOrder.addExpense(jobExpenses);
+
+                for (int i = 0; i < amountEditTexts.size(); i++) {
+                    Expense jobExpenses = new Expense(Double.parseDouble((amountEditTexts.get(i).getText().toString())),
+                            descriptionEditTexts.get(i).getText().toString(), finishedWorkOrder.getId());
+                    finishedWorkOrder.addExpense(jobExpenses);
+                }
+
                 finishedWorkOrder.setComment(textNotes.getText().toString());
+
+                Log.d(TAG, "onClick: FinishedWorkOrder: " + finishedWorkOrder.toString());
 
                 Intent timeAndExpencesFinishedIntent = new Intent(TimeAndExpenses.this, OrderList.class);
                 timeAndExpencesFinishedIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrderList);
@@ -109,15 +126,14 @@ public class TimeAndExpenses extends ToDoActivity {
 
                 Log.d(TAG, "onClick: Extra expense button clicked");
 
-                int amountWidth = pixelsToDpConversion(90);
-                int descriptionWidth = pixelsToDpConversion(200);
-                int height = pixelsToDpConversion(50);
-                int marginLeftRight = pixelsToDpConversion(10);
-                int marginTop = pixelsToDpConversion(5);
-                int padding = pixelsToDpConversion(5);
+                int amountWidth = dpToPixelsConversion(90);
+                int descriptionWidth = dpToPixelsConversion(200);
+                int height = dpToPixelsConversion(50);
+                int marginLeftRight = dpToPixelsConversion(10);
+                int marginTop = dpToPixelsConversion(5);
+                int padding = dpToPixelsConversion(5);
 
                 EditText newAmountEditText = new EditText(TimeAndExpenses.this);
-
                 newAmountEditText.setHint(R.string.cost);
 
                 LinearLayout.LayoutParams layoutParamsAmount = new LinearLayout.LayoutParams(amountWidth, height);
@@ -126,6 +142,9 @@ public class TimeAndExpenses extends ToDoActivity {
                 newAmountEditText.setLayoutParams(layoutParamsAmount);
                 newAmountEditText.setPadding(padding,0,0,0);
                 newAmountEditText.setBackgroundResource(R.drawable.border_style);
+                newAmountEditText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+                amountEditTexts.add(newAmountEditText);
 
                 EditText newDescriptionEditText = new EditText(TimeAndExpenses.this);
                 newDescriptionEditText.setHint(R.string.description);
@@ -136,6 +155,8 @@ public class TimeAndExpenses extends ToDoActivity {
                 newDescriptionEditText.setLayoutParams(layoutParamsDescription);
                 newDescriptionEditText.setPadding(padding,0,0,0);
                 newDescriptionEditText.setBackgroundResource(R.drawable.border_style);
+
+                descriptionEditTexts.add(newDescriptionEditText);
 
                 LinearLayout newLayout = new LinearLayout(TimeAndExpenses.this);
                 newLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -177,8 +198,8 @@ public class TimeAndExpenses extends ToDoActivity {
         return true;
     }
 
-    private int pixelsToDpConversion (int pixels) {
+    private int dpToPixelsConversion(int dp) {
         float scale = getResources().getDisplayMetrics().density;
-        return (int)(pixels*scale + 0.5f);
+        return (int)(dp*scale + 0.5f);
     }
 }
