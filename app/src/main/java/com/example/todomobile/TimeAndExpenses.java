@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.todomobile.api.json.APIRequester;
 import com.example.todomobile.models.Expense;
 import com.example.todomobile.models.WorkOrder;
 
@@ -49,6 +50,24 @@ public class TimeAndExpenses extends ToDoActivity {
 
     private List<EditText> amountEditTexts;
     private List<EditText> descriptionEditTexts;
+
+    public static final String FINISH_WORKORDER_URL = BASE_URL + "/workorders/status/finalReport";
+    public static final String ADD_EXPENSE_URL = BASE_URL + "/expenses";
+
+    private String finishWorkOrderJSON = "{" +
+            "    \"id\": \"%d\"," +
+            "    \"status\": \"%d\"," +
+            "    \"workStarted\": \"%s\"," +
+            "    \"workFinished\": \"%s\"," +
+            "    \"travelHours\": \"%.2f\"," +
+            "    \"comment\": \"%s\"" +
+            "}";
+
+    private String addExpenseJSON = "{" +
+            "    \"amount\": \"%.2f\"," +
+            "    \"description\": \"%s\"," +
+            "    \"workOrderId\": \"%d\"" +
+            "}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,24 +119,33 @@ public class TimeAndExpenses extends ToDoActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishedWorkOrder.setStatus(STATUS_DONE);
+
+                //Add expenses to database
+                for (int i = 0; i < amountEditTexts.size(); i++) {
+                    String addExpenseRequest = String.format(addExpenseJSON, Double.parseDouble((amountEditTexts.get(i).getText().toString())),
+                            descriptionEditTexts.get(i).getText().toString(), finishedWorkOrder.getId());
+                    Log.d(TAG, "onClick: workOrderId is: " + finishedWorkOrder.getId());
+                    Log.d(TAG, "onClick: JSON is: " + addExpenseRequest);
+                    APIRequester addExpenseRequester = new APIRequester(TimeAndExpenses.this, ADD_EXPENSE_MESSAGE);
+                    addExpenseRequester.execute(ADD_EXPENSE_URL, addExpenseRequest);
+                }
+
+                //Add work report details to database
+                String finishWorkOrderRequest = String.format(finishWorkOrderJSON, finishedWorkOrder.getId(),
+                        STATUS_DONE, textWorkStartTime.getText().toString(), textWorkEndTime.getText().toString(),
+                        Double.parseDouble(textTravelTime.getText().toString()), textNotes.getText().toString());
+                APIRequester finishWorkOrderRequester = new APIRequester(TimeAndExpenses.this, ORDER_FINISHED_MESSAGE);
+                finishWorkOrderRequester.execute(FINISH_WORKORDER_URL, finishWorkOrderRequest);
+
+
                 finishedWorkOrder.setTravelHours(Double.parseDouble(textTravelTime.getText().toString()));
                 finishedWorkOrder.setTimeStarted(textWorkStartTime.getText().toString());
                 finishedWorkOrder.setTimeFinished(textWorkEndTime.getText().toString());
-
-                for (int i = 0; i < amountEditTexts.size(); i++) {
-                    Expense jobExpenses = new Expense(Double.parseDouble((amountEditTexts.get(i).getText().toString())),
-                            descriptionEditTexts.get(i).getText().toString(), finishedWorkOrder.getId());
-                    finishedWorkOrder.addExpense(jobExpenses);
-                }
-
                 finishedWorkOrder.setComment(textNotes.getText().toString());
 
                 Log.d(TAG, "onClick: FinishedWorkOrder: " + finishedWorkOrder.toString());
 
-                Intent timeAndExpencesFinishedIntent = new Intent(TimeAndExpenses.this, OrderList.class);
-                timeAndExpencesFinishedIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrderList);
-                startActivity(timeAndExpencesFinishedIntent);
+
             }
         });
 
@@ -208,5 +236,11 @@ public class TimeAndExpenses extends ToDoActivity {
     @Override
     public void onDownloadComplete(String results, String message) throws JSONException {
 
+        if(message.equals(ORDER_FINISHED_MESSAGE)) {
+            finishedWorkOrder.setStatus(STATUS_DONE);
+            Intent timeAndExpencesFinishedIntent = new Intent(TimeAndExpenses.this, OrderList.class);
+            timeAndExpencesFinishedIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrderList);
+            startActivity(timeAndExpencesFinishedIntent);
+        }
     }
 }

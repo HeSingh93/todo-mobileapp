@@ -41,7 +41,7 @@ public class OrderDetail extends ToDoActivity {
 
     private String setWorkOrderStatusJSON = "{" +
             "    \"id\": \"%d\"," +
-            "    \"status\": \"%s\"" +
+            "    \"status\": \"%d\"" +
             "}";
 
     @Override

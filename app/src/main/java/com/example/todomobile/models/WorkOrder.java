@@ -176,7 +176,7 @@ public class WorkOrder implements Parcelable {
     @Override
     public String toString() {
         return "Workorder no " + id + " Time: " + dateTimeInfo
-                + "\nCustomer: " + customer.getCompanyName() + " Address: " + address
+                //+ "\nCustomer: " + customer.getCompanyName() + " Address: " + address
                 + "\nContact info: " + contactInfo
                 + "\nWork description: " + workDescription
                 + "\nNumber of expenses: " + expenses.size();
