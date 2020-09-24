@@ -64,7 +64,8 @@ public class OrderDetail extends ToDoActivity {
         jobFinishedButton = findViewById(R.id.finishedButtonOrderDetails);
 
         dateTextView.setText(currentWorkOrder.getDateTimeInfo());
-        companyTextView.setText(currentWorkOrder.getCustomer().getCompanyName());
+        companyTextView.setText("kund");
+        //companyTextView.setText(currentWorkOrder.getCustomer().getCompanyName());
         addressTextView.setText(currentWorkOrder.getAddress());
         workDescriptionTextView.setText(currentWorkOrder.getWorkDescription());
         contactInfoTextView.setText(currentWorkOrder.getContactInfo());

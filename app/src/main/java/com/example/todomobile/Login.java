@@ -50,7 +50,6 @@ public class Login extends ToDoActivity {
     private List<WorkOrder> workOrders;
 
     public static final String LOGIN_URL = BASE_URL + "/login";
-    public static final String LOGIN = "LOGIN";
 
     private String requestLogin = "{" +
             "    \"username\": \"%s\"," +
@@ -81,6 +80,7 @@ public class Login extends ToDoActivity {
                 String username = userNameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                Log.d(TAG, "onClick: button pressed");
                 if ((username.trim().length() < 1) || (password.trim().length() < 1)) {
                     Toast.makeText(Login.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 } else {
@@ -137,7 +137,7 @@ public class Login extends ToDoActivity {
     private void validateLogin(String username, String password) {
 
         String loginRequest = String.format(requestLogin, username, password);
-        APIRequester loginRequester = new APIRequester(Login.this, LOGIN);
+        APIRequester loginRequester = new APIRequester(Login.this, LOGIN_MESSAGE);
         loginRequester.execute(LOGIN_URL, loginRequest);
 
         /*final LoginForm loginForm = new LoginForm(username, password);
@@ -304,7 +304,7 @@ public class Login extends ToDoActivity {
     @Override
     public void onDownloadComplete(String results, String message) throws JSONException {
 
-        if(message.equals(LOGIN)) {
+        if(message.equals(LOGIN_MESSAGE)) {
             try {
                 JSONObject jsonEmployee = new JSONObject(results);
                 JSONArray workOrders = jsonEmployee.getJSONArray("workOrders");
@@ -324,11 +324,13 @@ public class Login extends ToDoActivity {
 
                     WorkOrder newWorkOrder = new WorkOrder(id, dateTimeInfo, address, workDescription,
                             contactInfo, customer, employeeId, status);
+                    Log.d(TAG, "onDownloadComplete: workOrder added");
                     workOrdersForEmployee.add(newWorkOrder);
                 }
 
                 Intent intent = new Intent(Login.this, OrderList.class);
                 intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrdersForEmployee);
+                Log.d(TAG, "onDownloadComplete: intent created");
 
                 startActivity(intent);
 

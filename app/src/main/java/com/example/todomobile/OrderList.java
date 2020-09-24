@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class OrderList extends ToDoActivity {
+    private static final String TAG = "OrderList";
 
     private ArrayList<WorkOrder> orderlistActiveEmployee;
     private ArrayList<WorkOrder> orderListNotAccepted;
@@ -39,6 +41,8 @@ public class OrderList extends ToDoActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
+
+        Log.d(TAG, "onCreate: OrderList started");
 
         final Intent intent = getIntent();
         intent.setExtrasClassLoader(WorkOrder.class.getClassLoader());
