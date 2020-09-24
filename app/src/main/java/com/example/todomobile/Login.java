@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.todomobile.api.entities.EmployeeEntity;
+import com.example.todomobile.api.entities.LoginForm;
 import com.example.todomobile.api.entities.WorkOrderEntity;
+import com.example.todomobile.api.retrofitservices.APIService;
 import com.example.todomobile.api.retrofitservices.RetrofitHelper;
 import com.example.todomobile.models.Customer;
 import com.example.todomobile.models.Employee;
@@ -23,6 +26,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Login extends ToDoActivity {
+
+    APIService apiService;
+    RetrofitHelper retrofitHelper;
 
     private Bundle apiData;
 
@@ -40,18 +46,49 @@ public class Login extends ToDoActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        apiService = RetrofitHelper.getAPIService();
         apiData = new Bundle();
         employees = new ArrayList<>();
         loginDetails = new ArrayList<>();
         customers = new ArrayList<>();
         workOrders = new ArrayList<>();
 
-        getData();
-        loadApi();
+        //   getData();
+        // loadApi();
         userNameEditText = findViewById(R.id.txtUserName);
         passwordEditText = findViewById(R.id.txtPassword);
         loginButton = findViewById(R.id.btnLogin);
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = userNameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                if ((username.trim().length() < 1) || (password.trim().length() < 1)) {
+                    Toast.makeText(Login.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    validateLogin(username, password);
+                    /*
+                    if (employeeId < 1) {
+                        Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                        userNameEditText.setText("");
+                        passwordEditText.setText("");
+                        userNameEditText.requestFocus();
+                    } else {
+                        ArrayList<WorkOrder> workOrdersForEmployee = getWorkOrders(employeeId);
+                        Intent intent = new Intent(Login.this, OrderList.class);
+                        intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrdersForEmployee);
+
+                        startActivity(intent);
+                    }
+
+                     */
+                }
+            }
+        });
+
+/*
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,16 +114,44 @@ public class Login extends ToDoActivity {
 
             }
         });
+
+ */
     }
 
-    private int validateLogin(String username, String password) {
+    private void validateLogin(String username, String password) {
 
-        for (LoginDetails loginDetail : loginDetails) {
+        final LoginForm loginForm = new LoginForm(username, password);
+        Call<LoginForm> call = apiService.login(loginForm);
+        call.enqueue(new Callback<LoginForm>() {
+            @Override
+            public void onResponse(Call<LoginForm> call, Response<LoginForm> response) {
+                LoginForm loginForm1 = response.body();
+
+                if(loginForm1 != null) {
+                  String userName = loginForm1.getUserName();
+                  Log.i("Username: " , "" +userName);
+                  EmployeeEntity employee = loginForm.getEmployeeEntity();
+                  String firstName = employee.getFirstName();
+                  String lastName = employee.getLastName();
+                    System.out.println(firstName + lastName);
+                    Log.i("LOGIN", "SUCCESSFUL LOGIN");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginForm> call, Throwable t) {
+                Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+
+                /*for (LoginDetails loginDetail : loginDetails) {
             if ((username.equals(loginDetail.getUsername())) && (password.equals(loginDetail.getPassword()))) {
                 return loginDetail.getEmployeeId();
             }
         }
         return -1;
+         */
     }
 
     private void getData() {
@@ -196,13 +261,13 @@ public class Login extends ToDoActivity {
     }
 
     private void getCurrentWorkOrders() {
-        final ArrayList<WorkOrderEntity> currentWorkOrders  = new ArrayList<>();
+        final ArrayList<WorkOrderEntity> currentWorkOrders = new ArrayList<>();
         apiData.putParcelableArrayList("Workorders", currentWorkOrders);
 
         RetrofitHelper.getAPIService().getCurrentWorkOrders().enqueue(new Callback<List<WorkOrderEntity>>() {
             @Override
             public void onResponse(Call<List<WorkOrderEntity>> call, Response<List<WorkOrderEntity>> response) {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     currentWorkOrders.addAll(response.body());
                     Log.i("Load", "WORKORDERS COLLECTED SUCCESSFULLY");
                 }

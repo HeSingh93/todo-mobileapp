@@ -1,6 +1,6 @@
 package com.example.todomobile.api.retrofitservices;
 
-import com.example.todomobile.api.entities.LoginEntity;
+import com.example.todomobile.api.entities.LoginForm;
 import com.example.todomobile.api.entities.WorkOrderEntity;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public interface APIService {
     );
 
     @POST("api/login/")
-    Call<LoginEntity> login(
-            @Body LoginEntity login
+    Call<LoginForm> login(
+            @Body LoginForm login
     );
 
 }

@@ -3,7 +3,10 @@ package com.example.todomobile.api.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.todomobile.models.WorkOrder;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class EmployeeEntity implements Parcelable {
 
@@ -18,6 +21,9 @@ public class EmployeeEntity implements Parcelable {
 
     @SerializedName("telephone_no")
     private String telephoneNo;
+
+    @SerializedName("workorders")
+    ArrayList<WorkOrder> workOrderEntityList;
 
     public EmployeeEntity() {
         //Empty no-args constructor
@@ -40,6 +46,10 @@ public class EmployeeEntity implements Parcelable {
         return telephoneNo;
     }
 
+    public ArrayList<WorkOrder> getWorkOrderEntityList() {
+        return workOrderEntityList;
+    }
+
     // Setters
     public void setId(Integer id) {
         this.id = id;
@@ -57,6 +67,9 @@ public class EmployeeEntity implements Parcelable {
         this.telephoneNo = telephoneNo;
     }
 
+    public void setWorkOrderEntityList(ArrayList<WorkOrder> workOrderEntityList) {
+        this.workOrderEntityList = workOrderEntityList;
+    }
 
     protected EmployeeEntity(Parcel in) {
         if (in.readByte() == 0) {
@@ -67,6 +80,7 @@ public class EmployeeEntity implements Parcelable {
         firstName = in.readString();
         lastName = in.readString();
         telephoneNo = in.readString();
+        workOrderEntityList = in.createTypedArrayList(WorkOrder.CREATOR);
     }
 
     @Override
@@ -80,6 +94,7 @@ public class EmployeeEntity implements Parcelable {
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(telephoneNo);
+        dest.writeTypedList(workOrderEntityList);
     }
 
     @Override
