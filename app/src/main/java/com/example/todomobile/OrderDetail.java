@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 
 import com.example.todomobile.models.WorkOrder;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -94,7 +96,7 @@ public class OrderDetail extends ToDoActivity {
             @Override
             public void onClick(View v) {
                 currentWorkOrder.setStatus(STATUS_UNASSIGNED);
-                currentWorkOrder.setEmployee(null);
+                currentWorkOrder.setEmployeeId(0);
                 workOrders.remove(currentWorkOrder);
 
                 Intent declineIntent = new Intent(OrderDetail.this, OrderList.class);
@@ -137,5 +139,10 @@ public class OrderDetail extends ToDoActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
         return true;
+    }
+
+    @Override
+    public void onDownloadComplete(String results, String message) throws JSONException {
+
     }
 }

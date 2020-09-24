@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.todomobile.models.Expense;
 import com.example.todomobile.models.WorkOrder;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -201,5 +203,10 @@ public class TimeAndExpenses extends ToDoActivity {
     private int dpToPixelsConversion(int dp) {
         float scale = getResources().getDisplayMetrics().density;
         return (int)(dp*scale + 0.5f);
+    }
+
+    @Override
+    public void onDownloadComplete(String results, String message) throws JSONException {
+
     }
 }

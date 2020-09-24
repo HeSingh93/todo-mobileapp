@@ -11,12 +11,18 @@ import android.widget.Toast;
 import com.example.todomobile.api.entities.EmployeeEntity;
 import com.example.todomobile.api.entities.LoginForm;
 import com.example.todomobile.api.entities.WorkOrderEntity;
+import com.example.todomobile.api.json.APIRequester;
 import com.example.todomobile.api.retrofitservices.APIService;
 import com.example.todomobile.api.retrofitservices.RetrofitHelper;
 import com.example.todomobile.models.Customer;
 import com.example.todomobile.models.Employee;
+import com.example.todomobile.models.Expense;
 import com.example.todomobile.models.LoginDetails;
 import com.example.todomobile.models.WorkOrder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +32,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Login extends ToDoActivity {
+
+    private static final String TAG = "Login";
 
     APIService apiService;
     RetrofitHelper retrofitHelper;
@@ -40,6 +48,14 @@ public class Login extends ToDoActivity {
     private List<LoginDetails> loginDetails;
     private List<Customer> customers;
     private List<WorkOrder> workOrders;
+
+    public static final String LOGIN_URL = BASE_URL + "/login";
+    public static final String LOGIN = "LOGIN";
+
+    private String requestLogin = "{" +
+            "    \"username\": \"%s\"," +
+            "    \"password\": \"%s\"" +
+            "}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +136,11 @@ public class Login extends ToDoActivity {
 
     private void validateLogin(String username, String password) {
 
-        final LoginForm loginForm = new LoginForm(username, password);
+        String loginRequest = String.format(requestLogin, username, password);
+        APIRequester loginRequester = new APIRequester(Login.this, LOGIN);
+        loginRequester.execute(LOGIN_URL, loginRequest);
+
+        /*final LoginForm loginForm = new LoginForm(username, password);
         Call<LoginForm> call = apiService.login(loginForm);
         call.enqueue(new Callback<LoginForm>() {
             @Override
@@ -143,7 +163,7 @@ public class Login extends ToDoActivity {
                 Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
                 call.cancel();
             }
-        });
+        });*/
 
                 /*for (LoginDetails loginDetail : loginDetails) {
             if ((username.equals(loginDetail.getUsername())) && (password.equals(loginDetail.getPassword()))) {
@@ -223,14 +243,14 @@ public class Login extends ToDoActivity {
         customers.add(customer9);
         customers.add(customer10);
 
-        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, employee1, STATUS_ASSIGNED);
-        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, employee2, STATUS_ASSIGNED);
-        WorkOrder workOrder3 = new WorkOrder(3, "2021-03-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, employee3, STATUS_ASSIGNED);
-        WorkOrder workOrder4 = new WorkOrder(4, "2021-01-07 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, employee3, STATUS_ACCEPTED);
-        WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, employee3, STATUS_ACCEPTED);
-        WorkOrder workOrder6 = new WorkOrder(6, "2020-09-21 13:00", "Mogatan 44, Anderstorp", "Årlig service av 4 entredörrar", "Stig Axelsson 070-4598777", customer1, employee3, STATUS_ACCEPTED);
-        WorkOrder workOrder7 = new WorkOrder(7, "2020-11-08 07:30", "Storgatan 8, Vimmerby", "Installation av armaturer i serverrum", "Anna Bergendahl 070-4323456", customer1, employee3, STATUS_ASSIGNED);
-        WorkOrder workOrder8 = new WorkOrder(8, "2020-09-29 11:00", "Lilla vägen 2, Stockholm", "Nybyggnation av serverskåp", "Ann-Louice Eriksson 076-0477666", customer1, employee3, STATUS_ASSIGNED);
+        WorkOrder workOrder1 = new WorkOrder(1, "2020-09-20 09:00", "Bilgatan 5, Göteborg", "Byte av fläkt i lagerlokal", "Arne Svensson 070-350000", customer1, 1, STATUS_ASSIGNED);
+        WorkOrder workOrder2 = new WorkOrder(2, "2020-09-21 13:00", "Bilgatan 2, Skövde", "Service av skrivare på kontor", "Carina Johansson carina@volvo.com", customer1, 2, STATUS_ASSIGNED);
+        WorkOrder workOrder3 = new WorkOrder(3, "2021-03-25 10:30", "Medicingatan 4, Hässleholm", "Reparation av trasig fläkt", "Marina Martinsson 073-456654", customer2, 3, STATUS_ASSIGNED);
+        WorkOrder workOrder4 = new WorkOrder(4, "2021-01-07 08:30", "Hamnvägen 8, Skellefteå", "Service av fläkt i fabrikslokal", "Erik Engdahl 070-474747", customer1, 3, STATUS_ACCEPTED);
+        WorkOrder workOrder5 = new WorkOrder(5, "2020-10-01 08:30", "Stora torget 8, Lysekil", "Service av bandmaskin", "Sven Andersson 076-4758847", customer1, 3, STATUS_ACCEPTED);
+        WorkOrder workOrder6 = new WorkOrder(6, "2020-09-21 13:00", "Mogatan 44, Anderstorp", "Årlig service av 4 entredörrar", "Stig Axelsson 070-4598777", customer1, 3, STATUS_ACCEPTED);
+        WorkOrder workOrder7 = new WorkOrder(7, "2020-11-08 07:30", "Storgatan 8, Vimmerby", "Installation av armaturer i serverrum", "Anna Bergendahl 070-4323456", customer1, 3, STATUS_ASSIGNED);
+        WorkOrder workOrder8 = new WorkOrder(8, "2020-09-29 11:00", "Lilla vägen 2, Stockholm", "Nybyggnation av serverskåp", "Ann-Louice Eriksson 076-0477666", customer1, 3, STATUS_ASSIGNED);
         //WorkOrder workOrder9 = new WorkOrder(9, "2021-02-21 14:00", "Hjortronstigen 34, Sundsvall", "Service av transportbana för paket", "Sten Wolter 070-9889765", customer1, employee3, STATUS_ASSIGNED);
         //WorkOrder workOrder10 = new WorkOrder(10, "2020-12-13 07:00", "Bertil Larssons Gata 1, Kiruna", "Service av AC i serverrum", "Anders Linné 070-3434222", customer1, employee3, STATUS_ASSIGNED);
 
@@ -249,7 +269,7 @@ public class Login extends ToDoActivity {
     private ArrayList<WorkOrder> getWorkOrders(int employeeId) {
         ArrayList<WorkOrder> workOrdersForEmployee = new ArrayList<>();
         for (WorkOrder workOrder : workOrders) {
-            if (workOrder.getEmployee().getId() == employeeId) {
+            if (workOrder.getEmployeeId() == employeeId) {
                 workOrdersForEmployee.add(workOrder);
             }
         }
@@ -279,5 +299,45 @@ public class Login extends ToDoActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void onDownloadComplete(String results, String message) throws JSONException {
+
+        if(message.equals(LOGIN)) {
+            try {
+                JSONObject jsonEmployee = new JSONObject(results);
+                JSONArray workOrders = jsonEmployee.getJSONArray("workOrders");
+
+                ArrayList<WorkOrder> workOrdersForEmployee = new ArrayList<>();
+
+                for (int i = 0; i < workOrders.length(); i++) {
+                    JSONObject workOrder = workOrders.getJSONObject(i);
+                    int id = workOrder.getInt("id");
+                    String dateTimeInfo = workOrder.getString("date") + " " + workOrder.getString("time");
+                    String address = workOrder.getString("address");
+                    String workDescription = workOrder.getString("workDescription");
+                    String contactInfo = workOrder.getString("contactInfo");
+                    Customer customer = null;
+                    int employeeId = jsonEmployee.getInt("id");
+                    int status = workOrder.getInt("status");
+
+                    WorkOrder newWorkOrder = new WorkOrder(id, dateTimeInfo, address, workDescription,
+                            contactInfo, customer, employeeId, status);
+                    workOrdersForEmployee.add(newWorkOrder);
+                }
+
+                Intent intent = new Intent(Login.this, OrderList.class);
+                intent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrdersForEmployee);
+
+                startActivity(intent);
+
+            } catch (JSONException e) {
+                Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "parseFoodInfo: JSONException: " + e.getMessage());
+            }
+        }
+
+
     }
 }

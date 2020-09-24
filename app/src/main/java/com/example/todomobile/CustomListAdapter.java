@@ -33,7 +33,8 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView addressTextViewID = (TextView) rowView.findViewById(R.id.addressTextviewID);
 
         dateTextViewID.setText(workOrders.get(position).getDateTimeInfo());
-        companyNameTextViewID.setText(workOrders.get(position).getCustomer().getCompanyName());
+        companyNameTextViewID.setText("kund");
+        //companyNameTextViewID.setText(workOrders.get(position).getCustomer().getCompanyName());
         addressTextViewID.setText(workOrders.get(position).getAddress());
 
         return rowView;

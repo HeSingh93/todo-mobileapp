@@ -9,6 +9,8 @@ import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.LoginDetails;
 import com.example.todomobile.models.WorkOrder;
 
+import org.json.JSONException;
+
 public class MainActivity extends ToDoActivity {
 
     @Override
@@ -20,4 +22,8 @@ public class MainActivity extends ToDoActivity {
     }
 
 
+    @Override
+    public void onDownloadComplete(String results, String message) throws JSONException {
+
+    }
 }

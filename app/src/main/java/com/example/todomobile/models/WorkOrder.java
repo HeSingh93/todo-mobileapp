@@ -17,7 +17,7 @@ public class WorkOrder implements Parcelable {
     private String workDescription;
     private String contactInfo;
     private Customer customer;
-    private Employee employee;
+    private int employeeId;
     private int status;
     private String timeStarted;
     private String timeFinished;
@@ -26,14 +26,14 @@ public class WorkOrder implements Parcelable {
     private List<Expense> expenses;
 
     public WorkOrder(int id, String dateTimeInfo, String address, String workDescription, String contactInfo,
-                     Customer customer, Employee employee, int status) {
+                     Customer customer, int employeeId, int status) {
         this.id = id;
         this.dateTimeInfo = dateTimeInfo;
         this.address = address;
         this.workDescription = workDescription;
         this.contactInfo = contactInfo;
         this.customer = customer;
-        this.employee = employee;
+        this.employeeId = employeeId;
         this.status = status;
         this.timeStarted = "";
         this.timeFinished = "";
@@ -49,7 +49,7 @@ public class WorkOrder implements Parcelable {
         workDescription = in.readString();
         contactInfo = in.readString();
         customer = in.readParcelable(Customer.class.getClassLoader());
-        employee = in.readParcelable(Employee.class.getClassLoader());
+        employeeId = in.readInt();
         status = in.readInt();
         timeStarted = in.readString();
         timeFinished = in.readString();
@@ -66,7 +66,7 @@ public class WorkOrder implements Parcelable {
         dest.writeString(workDescription);
         dest.writeString(contactInfo);
         dest.writeParcelable(customer, flags);
-        dest.writeParcelable(employee, flags);
+        dest.writeInt(employeeId);
         dest.writeInt(status);
         dest.writeString(timeStarted);
         dest.writeString(timeFinished);
@@ -116,12 +116,12 @@ public class WorkOrder implements Parcelable {
         return customer;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public int getStatus() {

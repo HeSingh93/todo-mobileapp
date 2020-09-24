@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.todomobile.models.Employee;
 import com.example.todomobile.models.WorkOrder;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -135,5 +137,10 @@ public class OrderList extends ToDoActivity {
         par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
 
         return par.height;
+    }
+
+    @Override
+    public void onDownloadComplete(String results, String message) throws JSONException {
+
     }
 }

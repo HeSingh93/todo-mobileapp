@@ -1,5 +1,6 @@
 package com.example.todomobile.api.retrofitservices;
 
+import com.example.todomobile.api.entities.EmployeeEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,6 +23,7 @@ public class RetrofitHelper {
                 .build();
 
     }
+
 
     public static APIService getAPIService() {
         return getRetrofitBuild().create(APIService.class);
