@@ -50,7 +50,8 @@ public class APIRequester extends AsyncTask<String, Void, String> {
             Log.d(TAG, "doInBackground: url is: " + url);
 
             connection =  (HttpURLConnection) url.openConnection();
-            if (message.equals(Login.LOGIN_MESSAGE)){
+            if ((message.equals(ToDoActivity.LOGIN_MESSAGE)) || (message.equals(ToDoActivity.ACCEPT_ORDER_MESSAGE))
+                || (message.equals(ToDoActivity.DECLINE_ORDER_MESSAGE))){
                 connection.setRequestMethod("POST");
             } /*else {
                 connection.setRequestMethod("POST");

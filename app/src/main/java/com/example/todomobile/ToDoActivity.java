@@ -11,6 +11,7 @@ public abstract class ToDoActivity extends AppCompatActivity {
 
     public static final String LOGIN_MESSAGE = "LOGIN";
     public static final String ACCEPT_ORDER_MESSAGE = "ACCEPT ORDER";
+    public static final String DECLINE_ORDER_MESSAGE = "DECLINE ORDER";
     public static final String ORDER_FINISHED_MESSAGE = "ORDER_FINISHED";
     public static final String ADD_EXPENSE_MESSAGE = "ADD_EXPENSE";
 

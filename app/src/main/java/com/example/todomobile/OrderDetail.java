@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.todomobile.api.json.APIRequester;
 import com.example.todomobile.models.WorkOrder;
 
 import org.json.JSONException;
@@ -35,6 +36,13 @@ public class OrderDetail extends ToDoActivity {
     private Button acceptButton;
     private Button declineButton;
     private Button jobFinishedButton;
+
+    public static final String SET_STATUS_URL = BASE_URL + "/workorders/status";
+
+    private String setWorkOrderStatusJSON = "{" +
+            "    \"id\": \"%d\"," +
+            "    \"status\": \"%s\"" +
+            "}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,25 +92,23 @@ public class OrderDetail extends ToDoActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentWorkOrder.setStatus(STATUS_ACCEPTED);
-                acceptButton.setEnabled(false);
-                acceptButton.setVisibility(View.INVISIBLE);
-                declineButton.setEnabled((false));
-                declineButton.setVisibility(View.INVISIBLE);
-                jobFinishedButton.setEnabled(true);
+
+                String setStatusRequest = String.format(setWorkOrderStatusJSON, currentWorkOrder.getId(),
+                        STATUS_ACCEPTED);
+                APIRequester setStatusRequester = new APIRequester(OrderDetail.this, ACCEPT_ORDER_MESSAGE);
+                setStatusRequester.execute(SET_STATUS_URL, setStatusRequest);
+
             }
         });
 
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentWorkOrder.setStatus(STATUS_UNASSIGNED);
-                currentWorkOrder.setEmployeeId(0);
-                workOrders.remove(currentWorkOrder);
 
-                Intent declineIntent = new Intent(OrderDetail.this, OrderList.class);
-                declineIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
-                startActivity(declineIntent);
+                String setStatusRequest = String.format(setWorkOrderStatusJSON, currentWorkOrder.getId(),
+                        STATUS_UNASSIGNED);
+                APIRequester setStatusRequester = new APIRequester(OrderDetail.this, DECLINE_ORDER_MESSAGE);
+                setStatusRequester.execute(SET_STATUS_URL, setStatusRequest);
             }
         });
 
@@ -145,5 +151,24 @@ public class OrderDetail extends ToDoActivity {
     @Override
     public void onDownloadComplete(String results, String message) throws JSONException {
 
+        if (message.equals(ACCEPT_ORDER_MESSAGE)) {
+
+            currentWorkOrder.setStatus(STATUS_ACCEPTED);
+            acceptButton.setEnabled(false);
+            acceptButton.setVisibility(View.INVISIBLE);
+            declineButton.setEnabled((false));
+            declineButton.setVisibility(View.INVISIBLE);
+            jobFinishedButton.setEnabled(true);
+
+        } else if (message.equals(DECLINE_ORDER_MESSAGE)) {
+
+            currentWorkOrder.setStatus(STATUS_UNASSIGNED);
+            currentWorkOrder.setEmployeeId(0);
+            workOrders.remove(currentWorkOrder);
+
+            Intent declineIntent = new Intent(OrderDetail.this, OrderList.class);
+            declineIntent.putParcelableArrayListExtra(WORKORDER_LIST_MESSAGE, workOrders);
+            startActivity(declineIntent);
+        }
     }
 }
